@@ -7,6 +7,7 @@ int JPG[] = {-1, -40};
 int BMP[] = {66, 77};
 int PDF[] = {37, 80, 68, 70};
 int PNG[] = {-119, 80, 78, 71, 13, 10, 26, 10};
+int MKV[] = {26, 69, -33, -93};
 
 int main(int argc, char ** argv)
 {	
@@ -56,6 +57,8 @@ int main(int argc, char ** argv)
 			}
 			else if (count == 4)
 			{
+				//for(int i = 0; i < 4; i++)
+					//cout << arr[i] << " ";
 				// this double if is bad practice but it improves readability
 				if (arr[0] == PDF[0] &&  arr[1] == PDF[1])
 				{
@@ -65,6 +68,16 @@ int main(int argc, char ** argv)
 							sigFound = 1;
 					}
 				}
+				
+				if (arr[0] == MKV[0] && arr[1] == MKV[1])
+				{
+					if(arr[2] == MKV[2] && arr[3] == MKV[3])
+					{
+						cout << "File is an MKV or WEBM" << endl;
+						sigFound = 1;
+					}
+				}
+				//cout << endl;
 			}
 			else if (count == 8)
 			{

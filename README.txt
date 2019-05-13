@@ -19,5 +19,22 @@ JPEG
 PNG
 BMP
 PDF
+MKV
+WEBM
+
+Planned Future File Formats:
+FLV
+3GP
+GIF
+SVG
+XLS
+CSV
+DOC/DOCX
+PPT/PPTX
+ZIP
+TAR
+RAR
+PSD
+DXF
 
 File Signatures gathered from www.garykessler.net/library/file_sigs.html 
