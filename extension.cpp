@@ -2,8 +2,14 @@
 #include <fstream>
 using namespace std;
 
+// global vars
+int JPG[] = {-1, -40};
+int BMP[] = {66, 77};
+int PDF[] = {37, 80, 68, 70};
+int PNG[] = {-119, 80, 78, 71, 13, 10, 26, 10};
+
 int main(int argc, char ** argv)
-{
+{	
 	// declaring vars
 	fstream file;
 	char read[16];
@@ -35,56 +41,43 @@ int main(int argc, char ** argv)
 				value += arr[i];
 			}
 			if (count == 2)
-			{
-				switch(value)
+			{;
+				if (arr[0] == JPG[0] && arr[1] == JPG[1])
 				{
-					case -41:
-						if (count == 2)
-						{
-							cout << "File is a JPEG" << endl;
-							sigFound = 1;
-						}
-						break;
-					case 143:
-						if (count == 2)
-						{
-							cout << "File is a BMP" << endl;
-							sigFound = 1;
-						}
-						break;
-					default:
-						break;
+					cout << "File is a JPG" << endl;
+					sigFound = 1;
+				}
+				
+				else if (arr [0] == BMP[0] && arr[1] == BMP[1])
+				{
+					cout << "File is a BMP" << endl;
+					sigFound = 1;
 				}
 			}
 			else if (count == 4)
 			{
-				switch(value)
+				// this double if is bad practice but it improves readability
+				if (arr[0] == PDF[0] &&  arr[1] == PDF[1])
 				{
-					case 255:
-						if (count == 4)
-						{
+					if (arr[2] == PDF[2] && arr[3] == PDF[3])
+					{
 							cout << "File is a PDF" << endl;
 							sigFound = 1;
-						}
-						break;
-					default:
-						break;
+					}
 				}
 			}
 			else if (count == 8)
 			{
-				switch (value)
+				for (int i = 0; i < 8; i++)
 				{
-					case 169:
-						if (count == 8)
-						{
-							cout << "File is a PNG" << endl;
-							sigFound = 1;
-						}
+					if (arr[i] != PNG[i])
 						break;
-					default:
-						break;
-				}			
+					if (i == 7 && arr[7] == PNG[7])
+					{
+						cout << "File is a PNG" << endl;
+						sigFound = 1;
+					}
+				}
 			}
 			count--;
 		} while (!sigFound && count > 0);
