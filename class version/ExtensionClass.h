@@ -18,7 +18,7 @@ class Extension
         const char * getSignature() const;
 
         // mutator
-        bool detectSignature(); // returns true for file signature found
+        void detectSignature(); // returns true for file signature found
                                 // returns false for file signature NOT found
     private:
         std::fstream file;

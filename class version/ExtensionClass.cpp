@@ -36,7 +36,7 @@ const char * Extension::getSignature() const
     return signature;
 }
 
-bool Extension::detectSignature()
+void Extension::detectSignature()
 {
     char read[16];
 	int arr[16], value;
