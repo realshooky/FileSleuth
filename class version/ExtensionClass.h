@@ -7,12 +7,6 @@ class Extension
         // containing the name of the file
         Extension(char *);
 
-        // setters
-        // these functions require a c-string
-        // containing the abbreviation of a file type
-        void setExtension(char *);
-        void setSignature(char *);
-
         // getters
         const char * getExtension() const;
         const char * getSignature() const;
@@ -22,6 +16,6 @@ class Extension
                                 // returns false for file signature NOT found
     private:
         std::fstream file;
-        char * extension;
-        char * signature;
+        char extension[20];
+        char signature[20];
 };

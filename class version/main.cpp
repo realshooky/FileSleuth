@@ -17,7 +17,8 @@ int main(int argc, char ** argv)
 		Extension x(c_line);
 		std::cout << "This file's extension is " << x.getExtension() << std::endl;
     	x.detectSignature();
-    	std::cout << "According to its signature, this file is a(n) " << x.getSignature() << std::endl;
+    	std::cout << "According to its signature, this file is a(n) ";
+    	std::cout << x.getSignature() << std::endl;
 	}
     return 0;
 }
