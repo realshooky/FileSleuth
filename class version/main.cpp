@@ -10,11 +10,7 @@ int main(int argc, char ** argv)
 	file.open(argv[1]);
 	if(file.is_open())
 	{
-		std::string line;
-		file >> line;
-		char c_line[line.size()];
-		strcpy(c_line, line.c_str());
-		Extension x(c_line);
+		Extension x(argv[1]);
 		std::cout << "This file's extension is " << x.getExtension() << std::endl;
     	x.detectSignature();
     	std::cout << "According to its signature, this file is a(n) ";
