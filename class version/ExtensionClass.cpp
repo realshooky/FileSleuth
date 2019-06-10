@@ -13,7 +13,8 @@ Extension::Extension(char * filename)
     file.open(filename, std::ios::in | std::ios::binary);
     strtok(filename, ".");
     extension = strtok(NULL, "\0");
-    signature = NULL;
+    char assign[] = "";
+	signature = assign;
 }
 
 void Extension::setExtension(char * filename)
@@ -64,13 +65,15 @@ void Extension::detectSignature()
 			{
 				if (arr[0] == JPG[0] && arr[1] == JPG[1])
 				{
-					std::cout << "File is a JPG" << std::endl;
+					char assign[] = "JPG";
+					signature = assign;
 					sigFound = 1;
 				}
 				
 				else if (arr [0] == BMP[0] && arr[1] == BMP[1])
 				{
-					std::cout << "File is a BMP" << std::endl;
+					char assign[] = "BMP";
+					signature = assign;
 					sigFound = 1;
 				}
 			}
@@ -81,7 +84,8 @@ void Extension::detectSignature()
 				{
 					if (arr[2] == PDF[2] && arr[3] == PDF[3])
 					{
-							std::cout << "File is a PDF" << std::endl;
+							char assign[] = "PDF";
+							signature = assign;
 							sigFound = 1;
 					}
 				}
@@ -90,7 +94,8 @@ void Extension::detectSignature()
 				{
 					if(arr[2] == MKV[2] && arr[3] == MKV[3])
 					{
-						std::cout << "File is an MKV or WEBM" << std::endl;
+						char assign[] = "MKV or WEBM";
+						signature = assign;
 						sigFound = 1;
 					}
 				}
@@ -103,7 +108,8 @@ void Extension::detectSignature()
 						break;
 					if (i == 7 && arr[7] == PNG[7])
 					{
-						std::cout << "File is a PNG" << std::endl;
+						char assign[] = "PNG";
+						this->signature = assign;
 						sigFound = 1;
 					}
 				}

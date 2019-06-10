@@ -15,10 +15,9 @@ int main(int argc, char ** argv)
 		char c_line[line.size()];
 		strcpy(c_line, line.c_str());
 		Extension x(c_line);
-		std::cout << "This file claims to be a(n) " << x.getExtension() << std::endl;
+		std::cout << "This file's extension is " << x.getExtension() << std::endl;
     	x.detectSignature();
-    	std::cout << "According to its signature, this file is a(n)";
-    	std::cout << x.getSignature() << std::endl;
+    	std::cout << "According to its signature, this file is a(n) " << x.getSignature() << std::endl;
 	}
     return 0;
 }
