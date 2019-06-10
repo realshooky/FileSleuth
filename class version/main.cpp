@@ -12,9 +12,16 @@ int main(int argc, char ** argv)
 	{
 		Extension x(argv[1]);
 		std::cout << "This file's extension is " << x.getExtension() << std::endl;
-    	x.detectSignature();
-    	std::cout << "According to its signature, this file is a(n) ";
-    	std::cout << x.getSignature() << std::endl;
+    	if (x.detectSignature())
+    	{
+			std::cout << "According to its signature, this file is a(n) ";
+    		std::cout << x.getSignature() << std::endl;
+		}
+		else
+		{
+			std::cout << x.getSignature() << std::endl;
+		}
+		
 	}
     return 0;
 }

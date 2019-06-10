@@ -11,11 +11,11 @@ class Extension
         const char * getExtension() const;
         const char * getSignature() const;
 
-        // mutator
-        void detectSignature(); // returns true for file signature found
-                                // returns false for file signature NOT found
+        // detects and assigns the correct
+        // file signature to the Extension object
+        bool detectSignature();
     private:
         std::fstream file;
-        char extension[20];
-        char signature[20];
+        char extension[50];
+        char signature[50];
 };

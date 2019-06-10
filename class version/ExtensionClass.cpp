@@ -13,7 +13,7 @@ Extension::Extension(char * filename)
     file.open(filename, std::ios::in | std::ios::binary);
     strtok(filename, ".");
     strcpy(extension, strtok(NULL, "\0"));
-    char assign[] = "";
+    char assign[] = "\0";
 	strcpy(signature, assign);
 }
 
@@ -27,7 +27,7 @@ const char * Extension::getSignature() const
     return signature;
 }
 
-void Extension::detectSignature()
+bool Extension::detectSignature()
 {
     char read[16];
 	int arr[16], value;
@@ -58,6 +58,7 @@ void Extension::detectSignature()
 					char assign[] = "JPG";
 					strcpy(signature, assign);
 					sigFound = 1;
+					return sigFound;
 				}
 				
 				else if (arr [0] == BMP[0] && arr[1] == BMP[1])
@@ -65,6 +66,7 @@ void Extension::detectSignature()
 					char assign[] = "BMP";
 					strcpy(signature, assign);
 					sigFound = 1;
+					return sigFound;
 				}
 			}
 			else if (count == 4)
@@ -77,6 +79,7 @@ void Extension::detectSignature()
 							char assign[] = "PDF";
 							strcpy(signature, assign);
 							sigFound = 1;
+							return sigFound;
 					}
 				}
 				
@@ -87,6 +90,7 @@ void Extension::detectSignature()
 						char assign[] = "MKV or WEBM";
 						strcpy(signature, assign);
 						sigFound = 1;
+						return sigFound;
 					}
 				}
 			}
@@ -101,11 +105,18 @@ void Extension::detectSignature()
 						char assign[] = "PNG";
 						strcpy(signature, assign);
 						sigFound = 1;
+						return sigFound;
 					}
 				}
 			}
 			count--;
 		} while (!sigFound && count > 0);
+		if (!sigFound && count == 0) 
+		{
+			strcpy(signature, "File signature not supported or unknown file type");
+			return sigFound;
+		}
 	}
 	else std::cout << "File does not exist" << std::endl;
+	return false;
 }
