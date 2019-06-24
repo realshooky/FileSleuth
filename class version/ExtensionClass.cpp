@@ -29,16 +29,17 @@ const char * Extension::getSignature() const
 
 bool Extension::detectSignature()
 {
-    char read[16];
+  char read[16];
 	int arr[16], value;
 
-    int JPG[] = {-1, -40};
+  int JPG[] = {-1, -40};
 	int BMP[] = {66, 77};
 	int PDF[] = {37, 80, 68, 70};
 	int PNG[] = {-119, 80, 78, 71, 13, 10, 26, 10};
 	int MKV[] = {26, 69, -33, -93};
+  int MIDI[] = {77, 84, 104, 100};
 
-    if (file.is_open())
+  if (file.is_open())
 	{
 		int count = 16;
 		bool sigFound = 0;
@@ -93,6 +94,17 @@ bool Extension::detectSignature()
 						return sigFound;
 					}
 				}
+
+        if (arr[0] == MIDI[0] && arr[1] == MIDI[1])
+        {
+          if (arr[2] == MIDI[2] && arr[3] == MIDI[3])
+          {
+            char assign[] = "MID/MIDI or PCS file";
+            strcpy(signature, assign);
+            sigFound = 1;
+            return sigFound;
+          }
+        }
 			}
 			else if (count == 8)
 			{
