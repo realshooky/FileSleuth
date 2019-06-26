@@ -6,11 +6,9 @@
 
 int main(int argc, char ** argv)
 {
-	std::fstream file;
-	file.open(argv[1]);
-	if(file.is_open())
+	Extension x(argv[1]);
+	if(x.getFileStatus())
 	{
-		Extension x(argv[1]);
 		std::cout << "This file's extension is " << x.getExtension() << std::endl;
     	if (x.detectSignature())
     	{
@@ -23,5 +21,6 @@ int main(int argc, char ** argv)
 		}
 		
 	}
+	else std::cout << "No file found at provided path: " << argv[1] << std::endl;
     return 0;
 }
