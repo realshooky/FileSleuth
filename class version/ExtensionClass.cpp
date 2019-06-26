@@ -32,12 +32,19 @@ bool Extension::detectSignature()
   char read[16];
 	int arr[16], value;
 
+  // length 2
   int JPG[] = {-1, -40};
 	int BMP[] = {66, 77};
+  
+  // length 4
 	int PDF[] = {37, 80, 68, 70};
-	int PNG[] = {-119, 80, 78, 71, 13, 10, 26, 10};
 	int MKV[] = {26, 69, -33, -93};
   int MIDI[] = {77, 84, 104, 100};
+  int DAT[] = {67, 82, 69, 71};
+
+  // length 8
+  int PNG[] = {-119, 80, 78, 71, 13, 10, 26, 10};
+  int FLAC[] = {102, 76, 97, 67, 0, 0, 0, 34};
 
   if (file.is_open())
 	{
@@ -52,6 +59,11 @@ bool Extension::detectSignature()
 				arr[i] = read[i];
 				value += arr[i];
 			}
+
+      //  Future Implementations should break each of the sections
+      //  up by length and give each a discrete function call
+      //  simplifying and shortening the detectSignature() function
+
 			if (count == 2)
 			{
 				if (arr[0] == JPG[0] && arr[1] == JPG[1])
@@ -95,11 +107,22 @@ bool Extension::detectSignature()
 					}
 				}
 
-        if (arr[0] == MIDI[0] && arr[1] == MIDI[1])
+				if (arr[0] == MIDI[0] && arr[1] == MIDI[1])
+				{
+					if (arr[2] == MIDI[2] && arr[3] == MIDI[3])
+					{
+						char assign[] = "MID/MIDI or PCS";
+						strcpy(signature, assign);
+						sigFound = 1;
+						return sigFound;
+					}
+				}
+
+        if (arr[0] == DAT[0] && arr[1] == DAT[1])
         {
-          if (arr[2] == MIDI[2] && arr[3] == MIDI[3])
+          if (arr[2] == DAT[2] && arr[3] == DAT[3])
           {
-            char assign[] = "MID/MIDI or PCS file";
+            char assign[] = "DAT";
             strcpy(signature, assign);
             sigFound = 1;
             return sigFound;
