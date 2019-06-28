@@ -71,70 +71,16 @@ bool Extension::detectSignature()
 
 			if (count == 2)
 			{
-				if (arr[0] == JPG[0] && arr[1] == JPG[1])
-				{
-					char assign[] = "JPG";
-					strcpy(signature, assign);
-					sigFound = 1;
-					return sigFound;
-				}
-				
-				else if (arr [0] == BMP[0] && arr[1] == BMP[1])
-				{
-					char assign[] = "BMP";
-					strcpy(signature, assign);
-					sigFound = 1;
-					return sigFound;
-				}
+        if (count2compare(arr, JPG, "JPG")) return sigFound = true;
+        else if (count2compare(arr, BMP, "BMP")) return sigFound = true;
 			}
 			else if (count == 4)
 			{
 				// this double if is bad practice but it improves readability
-				if (arr[0] == PDF[0] &&  arr[1] == PDF[1])
-				{
-					if (arr[2] == PDF[2] && arr[3] == PDF[3])
-					{
-							char assign[] = "PDF";
-							strcpy(signature, assign);
-							sigFound = 1;
-							return sigFound;
-					}
-				}
-				
-        if (count4compare(arr, MKV, "MKV or WEBM")) return sigFound = true;
-				/*if (arr[0] == MKV[0] && arr[1] == MKV[1])
-				{
-					if(arr[2] == MKV[2] && arr[3] == MKV[3])
-					{
-						char assign[] = "MKV or WEBM";
-						strcpy(signature, assign);
-						sigFound = 1;
-						return sigFound;
-					}
-        }*/
-
-        if (count4compare(arr, MIDI, "MIDI")) return sigFound = true;
-				/*if (arr[0] == MIDI[0] && arr[1] == MIDI[1])
-				{
-					if (arr[2] == MIDI[2] && arr[3] == MIDI[3])
-					{
-						char assign[] = "MID/MIDI or PCS";
-						strcpy(signature, assign);
-						sigFound = 1;
-						return sigFound;
-					}
-        }*/
-
-        if (arr[0] == DAT[0] && arr[1] == DAT[1])
-        {
-          if (arr[2] == DAT[2] && arr[3] == DAT[3])
-          {
-            char assign[] = "DAT";
-            strcpy(signature, assign);
-            sigFound = 1;
-            return sigFound;
-          }
-        }
+        if (count4compare(arr, PDF, "PDF")) return sigFound = true;			
+        else if (count4compare(arr, MKV, "MKV or WEBM")) return sigFound = true;		
+        else if (count4compare(arr, MIDI, "MIDI")) return sigFound = true;
+        else if (count4compare(arr, DAT, "DAT")) return sigFound = true;
 			}
 
       // count 8 seems to be very inefficient
@@ -142,7 +88,7 @@ bool Extension::detectSignature()
 			else if (count == 8)
 			{
         if (count8compare(arr, PNG, "PNG")) return sigFound = true;
-        if (count8compare(arr, FLAC, "FLAC")) return sigFound = true;
+        else if (count8compare(arr, FLAC, "FLAC")) return sigFound = true;
 			}
 			count--;
 		} while (!sigFound && count > 0);
@@ -158,6 +104,11 @@ bool Extension::detectSignature()
 
 bool Extension::count2compare(int carr[], int farr[], char assign[])
 {
+  if (carr[0] == farr[0] && carr[1] == farr[1])
+  {
+    strcpy(signature, assign);
+    return true;
+  }
   return false;
 }
 
